@@ -1,7 +1,6 @@
-import _ from 'lodash';
-console.log(_.shuffle([1,2,3]));
+import { FindGuitarTester } from "./FindGuitarTester";
 
-import { Example, ExampleStatus } from './Example';
+const findGuitarTester = new FindGuitarTester();
 
-const example = new Example('id1', 'TS Course', ExampleStatus.Active);
-console.log(example);
+findGuitarTester.main();
+
