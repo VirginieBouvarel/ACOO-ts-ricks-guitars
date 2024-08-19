@@ -13,13 +13,19 @@ export class FindGuitarTester {
     console.log(inventory);
 
     const whatErinLikes = new Guitar("", 0, Builder.FENDER, "Stratocaster", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
-    const guitar = inventory.search(whatErinLikes);
+    const matchingGuitars = inventory.search(whatErinLikes);
 
-    if (guitar !== null) {
-      console.log(`Erin, you might like this ${guitar.getBuilder()} ${guitar.getModel()} ${guitar.getType()}
-        ${guitar.getBackWood()} back and sides,
-        ${guitar.getTopWood()} top.
-        You can have it for only $${guitar.getPrice()} !`);
+    if (matchingGuitars.length !== 0) {
+      console.log(`Erin, you might like this guitars :`);
+      
+      for (let i = 0; i <= matchingGuitars.length -1; i++) {
+        const currentGuitar: Guitar = matchingGuitars[i];
+        console.log(`We have a ${currentGuitar.getBuilder()} ${currentGuitar.getModel()} ${currentGuitar.getType()} guitar
+        ${currentGuitar.getBackWood()} back and sides,
+        ${currentGuitar.getTopWood()} top.
+        You can have it for only $${currentGuitar.getPrice()}!
+        ----`);
+      }
     } else {
       console.log("Sorry, Erin, we have nothing for you.")
     }
