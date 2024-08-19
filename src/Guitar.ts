@@ -1,13 +1,17 @@
+import { Builder } from "./enums/Builder";
+import { Type } from "./enums/Type";
+import { Wood } from "./enums/Wood";
+
 export class Guitar {
   private serialNumber: string;
   private price: number;
-  private builder: string;
+  private builder: Builder;
   private model: string;
-  private type: string;
-  private backWood: string;
-  private topWood: string;
+  private type: Type;
+  private backWood: Wood;
+  private topWood: Wood;
 
-  constructor( serialNumber: string, price: number, builder: string, model: string, type: string, backWood: string, topWood: string ) {
+  constructor( serialNumber: string, price: number, builder: Builder, model: string, type: Type, backWood: Wood, topWood: Wood ) {
     this.serialNumber = serialNumber;
     this.price = price;
     this.builder = builder;
@@ -26,19 +30,19 @@ export class Guitar {
   setPrice(newPrice: number): void {
     this.price = newPrice;
   }
-  getBuilder(): string {
+  getBuilder(): Builder {
     return this.builder;
   }
   getModel(): string {
     return this.model;
   }
-  getType(): string {
+  getType(): Type {
     return this.type;
   }
-  getBackWood(): string {
+  getBackWood(): Wood {
     return this.backWood;
   }
-  getTopWood(): string {
+  getTopWood(): Wood {
     return this.topWood;
   }
 }

@@ -1,3 +1,7 @@
+import { Builder } from "./enums/Builder";
+import { Type } from "./enums/Type";
+import { Wood } from "./enums/Wood";
+
 import { Guitar } from "./Guitar";
 
 export class Inventory {
@@ -10,11 +14,11 @@ export class Inventory {
   addGuitar(
     serialNumber: string,
     price: number,
-    builder: string,
+    builder: Builder,
     model: string,
-    type: string,
-    backWood: string,
-    topWood: string
+    type: Type,
+    backWood: Wood,
+    topWood: Wood
   ): void {
     const newGuitar = new Guitar(serialNumber, price, builder, model, type, backWood, topWood);
     this.guitars.push(newGuitar);
@@ -36,8 +40,8 @@ export class Inventory {
       const builder: string = searchGuitar.getBuilder();
       if (builder !== null && builder !== '' && builder !== currentGuitar.getBuilder()) continue;
 
-      const model: string = searchGuitar.getModel();
-      if (model !== null && model !== '' && model !== currentGuitar.getModel()) continue;
+      const model: string = searchGuitar.getModel().toLowerCase();
+      if (model !== null && model !== '' && model !== currentGuitar.getModel().toLowerCase()) continue;
 
       const type: string = searchGuitar.getType();
       if (type !== null && type !== '' && type !== currentGuitar.getType()) continue;
