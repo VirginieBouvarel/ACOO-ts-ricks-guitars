@@ -32,11 +32,12 @@ export class Inventory {
     return null;
   }
 
-  search(searchGuitar: Guitar): Guitar | null {
+  search(searchGuitar: Guitar): Guitar[] {
+    const matchingGuitars: Guitar[] = [];
+
     for (let i = 0; i <= this.guitars.length -1; i++) {
       const currentGuitar: Guitar = this.guitars[i];
-      // Ignore serial number since that's unique
-      // Ignore price since that's unique
+
       const builder: string = searchGuitar.getBuilder();
       if (builder !== null && builder !== '' && builder !== currentGuitar.getBuilder()) continue;
 
@@ -52,8 +53,9 @@ export class Inventory {
       const topWood: string = searchGuitar.getTopWood();
       if (topWood !== null && topWood !== '' && topWood !== currentGuitar.getTopWood()) continue;
 
-      return currentGuitar;
+      matchingGuitars.push(currentGuitar);
     }
-    return null;
+
+    return matchingGuitars;
   }
 }
