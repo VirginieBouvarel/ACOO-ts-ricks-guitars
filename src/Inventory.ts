@@ -1,8 +1,5 @@
 import { GuitarSpec } from "./GuitarSpec";
 import { Guitar } from "./Guitar";
-import { Builder } from "./enums/Builder";
-import { Type } from "./enums/Type";
-import { Wood } from "./enums/Wood";
 
 export class Inventory {
   private guitars: Guitar[];
@@ -14,13 +11,9 @@ export class Inventory {
   addGuitar(
     serialNumber: string,
     price: number,
-    builder: Builder,
-    model: string,
-    type: Type,
-    backWood: Wood,
-    topWood: Wood
+    spec: GuitarSpec,
   ): void {
-    const newGuitar = new Guitar(serialNumber, price, builder, model, type, backWood, topWood);
+    const newGuitar = new Guitar(serialNumber, price, spec);
     this.guitars.push(newGuitar);
   }
 
