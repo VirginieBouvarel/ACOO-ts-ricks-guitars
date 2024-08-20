@@ -32,4 +32,12 @@ export class GuitarSpec {
   getTopWood(): Wood {
     return this.topWood;
   }
+  matches(otherSpec: GuitarSpec): boolean {
+    if (this.builder !== otherSpec.builder) return false;
+    if (this.model !== null && this.model !== "" && this.model.toLowerCase() !== otherSpec.model.toLowerCase()) return false;
+    if (this.type !== otherSpec.type) return false;
+    if (this.backWood !== otherSpec.backWood) return false;
+    if (this.topWood !== otherSpec.topWood) return false;
+    return true;
+  }
 }
