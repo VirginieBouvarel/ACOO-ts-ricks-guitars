@@ -1,8 +1,5 @@
 import { GuitarSpec } from "./GuitarSpec";
 import { Guitar } from "./Guitar";
-import { Builder } from "./enums/Builder";
-import { Type } from "./enums/Type";
-import { Wood } from "./enums/Wood";
 
 export class Inventory {
   private guitars: Guitar[];
@@ -14,13 +11,9 @@ export class Inventory {
   addGuitar(
     serialNumber: string,
     price: number,
-    builder: Builder,
-    model: string,
-    type: Type,
-    backWood: Wood,
-    topWood: Wood
+    spec: GuitarSpec,
   ): void {
-    const newGuitar = new Guitar(serialNumber, price, builder, model, type, backWood, topWood);
+    const newGuitar = new Guitar(serialNumber, price, spec);
     this.guitars.push(newGuitar);
   }
 
@@ -38,23 +31,7 @@ export class Inventory {
     for (let i = 0; i <= this.guitars.length -1; i++) {
       const currentGuitar: Guitar = this.guitars[i];
       const currentGuitarSpec = currentGuitar.getSpec();
-
-      const builder: string = searchSpec.getBuilder();
-      if (builder !== null && builder !== '' && builder !== currentGuitarSpec.getBuilder()) continue;
-
-      const model: string = searchSpec.getModel().toLowerCase();
-      if (model !== null && model !== '' && model !== currentGuitarSpec.getModel().toLowerCase()) continue;
-
-      const type: string = searchSpec.getType();
-      if (type !== null && type !== '' && type !== currentGuitarSpec.getType()) continue;
-
-      const backWood: string = searchSpec.getBackWood();
-      if (backWood !== null && backWood !== '' && backWood !== currentGuitarSpec.getBackWood()) continue;
-
-      const topWood: string = searchSpec.getTopWood();
-      if (topWood !== null && topWood !== '' && topWood !== currentGuitarSpec.getTopWood()) continue;
-
-      matchingGuitars.push(currentGuitar);
+      if (currentGuitarSpec.matches(searchSpec)) matchingGuitars.push(currentGuitar);
     }
 
     return matchingGuitars;
