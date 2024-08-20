@@ -1,6 +1,3 @@
-import { Builder } from "./enums/Builder";
-import { Type } from "./enums/Type";
-import { Wood } from "./enums/Wood";
 import { GuitarSpec } from "./GuitarSpec";
 
 export class Guitar {
@@ -9,10 +6,10 @@ export class Guitar {
   spec: GuitarSpec;
 
 
-  constructor( serialNumber: string, price: number, builder: Builder, model: string, type: Type, backWood: Wood, topWood: Wood ) {
+  constructor( serialNumber: string, price: number, spec: GuitarSpec ) {
     this.serialNumber = serialNumber;
     this.price = price;
-    this.spec = new GuitarSpec(builder, model, type, backWood, topWood);
+    this.spec = spec;
   }
 
   getSerialNumber(): string {
