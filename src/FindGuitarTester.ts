@@ -4,15 +4,15 @@ import { Wood } from "./enums/Wood";
 
 import { Guitar } from "./Guitar";
 import { Inventory } from "./Inventory";
+import { GuitarSpec } from "./GuitarSpec";
 
 export class FindGuitarTester {
   main(): void {
-    // Set up Rick's guitar inventory
     const inventory = new Inventory();
     this.initializeInventory(inventory);
     console.log(inventory);
 
-    const whatErinLikes = new Guitar("", 0, Builder.FENDER, "Stratocaster", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+    const whatErinLikes = new GuitarSpec(Builder.FENDER, "Stratocaster", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
     const matchingGuitars = inventory.search(whatErinLikes);
 
     if (matchingGuitars.length !== 0) {
@@ -20,9 +20,11 @@ export class FindGuitarTester {
       
       for (let i = 0; i <= matchingGuitars.length -1; i++) {
         const currentGuitar: Guitar = matchingGuitars[i];
-        console.log(`We have a ${currentGuitar.getBuilder()} ${currentGuitar.getModel()} ${currentGuitar.getType()} guitar
-        ${currentGuitar.getBackWood()} back and sides,
-        ${currentGuitar.getTopWood()} top.
+        const currentGuitarSpec = currentGuitar.getSpec();
+
+        console.log(`We have a ${currentGuitarSpec.getBuilder()} ${currentGuitarSpec.getModel()} ${currentGuitarSpec.getType()} guitar
+        ${currentGuitarSpec.getBackWood()} back and sides,
+        ${currentGuitarSpec.getTopWood()} top.
         You can have it for only $${currentGuitar.getPrice()}!
         ----`);
       }
