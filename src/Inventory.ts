@@ -1,39 +1,53 @@
 import { GuitarSpec } from "./GuitarSpec";
 import { Guitar } from "./Guitar";
+import { Instrument } from "./Instrument";
+import { MandolinSpec } from "./MandolinSpec";
+import { Mandolin } from "./Mandolin";
 
 export class Inventory {
-  private guitars: Guitar[];
+  private inventory: Instrument[];
 
   constructor() {
-    this.guitars = [];
+    this.inventory = [];
   }
 
-  addGuitar(
+  addInstrument(
     serialNumber: string,
     price: number,
-    spec: GuitarSpec,
+    spec: GuitarSpec | MandolinSpec,
   ): void {
-    const newGuitar = new Guitar(serialNumber, price, spec);
-    this.guitars.push(newGuitar);
+    if (spec instanceof GuitarSpec) {
+      this.inventory.push(new Guitar(serialNumber, price, spec));
+    } else if (spec instanceof MandolinSpec) {
+      this.inventory.push(new Mandolin(serialNumber, price, spec));
+    }
   }
 
-  getGuitar(serialNumber: string): Guitar| null {
-    for (let i = 0; i <= this.guitars.length; i++) {
-      const currentGuitar = this.guitars[i];
-      if (currentGuitar.getSerialNumber() === serialNumber) return currentGuitar;
+  getInstrument(serialNumber: string): Instrument | null {
+    for (let i = 0; i <= this.inventory.length; i++) {
+      const currentInstrument = this.inventory[i];
+      if (currentInstrument.getSerialNumber() === serialNumber) return currentInstrument;
     }
     return null;
   }
 
-  search(searchSpec: GuitarSpec): Guitar[] {
+  searchGuitar(searchSpec: GuitarSpec): Guitar[] {
     const matchingGuitars: Guitar[] = [];
-
-    for (let i = 0; i <= this.guitars.length -1; i++) {
-      const currentGuitar: Guitar = this.guitars[i];
-      const currentGuitarSpec = currentGuitar.getSpec();
+    for (let i = 0; i <= this.inventory.length -1; i++) {
+      const currentGuitar: Guitar = this.inventory[i];
+      const currentGuitarSpec = currentGuitar.getSpec() as GuitarSpec;
       if (currentGuitarSpec.matches(searchSpec)) matchingGuitars.push(currentGuitar);
     }
-
     return matchingGuitars;
+  }
+
+  searchMandolin(searchSpec: MandolinSpec): Mandolin[] {
+    const matchingMandolins: Mandolin[] = [];
+    for (let i = 0; i <= this.inventory.length -1; i++) {
+      const currentMandolin: Guitar = this.inventory[i];
+      const currentMandolinSpec = currentMandolin.getSpec();
+      if (currentMandolinSpec.matches(searchSpec)) matchingMandolins.push(currentMandolin);
+    }
+    return matchingMandolins;
   }
 }

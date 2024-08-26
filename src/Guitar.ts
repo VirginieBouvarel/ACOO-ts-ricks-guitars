@@ -1,27 +1,8 @@
 import { GuitarSpec } from "./GuitarSpec";
+import { Instrument } from "./Instrument";
 
-export class Guitar {
-  private serialNumber: string;
-  private price: number;
-  spec: GuitarSpec;
-
-
+export class Guitar extends Instrument{
   constructor( serialNumber: string, price: number, spec: GuitarSpec ) {
-    this.serialNumber = serialNumber;
-    this.price = price;
-    this.spec = spec;
-  }
-
-  getSerialNumber(): string {
-    return this.serialNumber;
-  }
-  getPrice(): number {
-    return this.price;
-  }
-  setPrice(newPrice: number): void {
-    this.price = newPrice;
-  }
-  getSpec(): GuitarSpec {
-    return this.spec;
+    super(serialNumber, price, spec);
   }
 }
