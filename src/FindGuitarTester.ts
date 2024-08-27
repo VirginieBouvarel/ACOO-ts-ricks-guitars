@@ -2,7 +2,6 @@ import { Builder } from "./enums/Builder";
 import { Type } from "./enums/Type";
 import { Wood } from "./enums/Wood";
 
-import { Guitar } from "./Guitar";
 import { Inventory } from "./Inventory";
 import { GuitarSpec } from "./GuitarSpec";
 
@@ -20,7 +19,7 @@ export class FindGuitarTester {
       console.log(`Erin, you might like this guitars :`);
 
       for (let i = 0; i <= matchingGuitars.length -1; i++) {
-        const currentGuitar: Guitar = matchingGuitars[i];
+        const currentGuitar = matchingGuitars[i];
 
 
         const currentGuitarSpec = currentGuitar.getSpec() as GuitarSpec;
