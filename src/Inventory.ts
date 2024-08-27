@@ -1,8 +1,4 @@
-import { GuitarSpec } from "./GuitarSpec";
-import { Guitar } from "./Guitar";
 import { Instrument } from "./Instrument";
-import { MandolinSpec } from "./MandolinSpec";
-import { Mandolin } from "./Mandolin";
 import { InstrumentSpec } from "./InstrumentSpec";
 
 export class Inventory {
@@ -12,16 +8,8 @@ export class Inventory {
     this.inventory = [];
   }
 
-  addInstrument(
-    serialNumber: string,
-    price: number,
-    spec: GuitarSpec | MandolinSpec,
-  ): void {
-    if (spec instanceof GuitarSpec) {
-      this.inventory.push(new Guitar(serialNumber, price, spec));
-    } else if (spec instanceof MandolinSpec) {
-      this.inventory.push(new Mandolin(serialNumber, price, spec));
-    }
+  addInstrument(serialNumber: string, price: number, spec: InstrumentSpec ): void {
+    this.inventory.push(new Instrument(serialNumber, price, spec));
   }
 
   getInstrument(serialNumber: string): Instrument | null {
