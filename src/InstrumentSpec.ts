@@ -2,7 +2,7 @@ import { Builder } from "./enums/Builder";
 import { Type } from "./enums/Type";
 import { Wood } from "./enums/Wood";
 
-export abstract class InstrumentSpec {
+export class InstrumentSpec {
   private builder: Builder;
   private model: string;
   private type: Type;

@@ -13,7 +13,7 @@ export class FindGuitarTester {
     console.log(inventory);
 
     const whatErinLikes = new GuitarSpec(Builder.FENDER, "Stratocaster", Type.ELECTRIC, Wood.ALDER, Wood.ALDER, 6);
-    const matchingGuitars = inventory.searchGuitar(whatErinLikes);
+    const matchingGuitars = inventory.search(whatErinLikes);
     console.log(matchingGuitars);
 
     if (matchingGuitars.length !== 0) {
