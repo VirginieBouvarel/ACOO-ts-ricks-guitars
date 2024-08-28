@@ -13,30 +13,28 @@ export class FindGuitarTester {
     console.log(inventory);
 
     const properties = new Map<string, any>();
-    properties.set("builder", Builder.FENDER);
-    properties.set("model", "Stratocaster");
-    properties.set("type", Type.ELECTRIC);
-    properties.set("backWood", Wood.ALDER);
-    properties.set("topWood", Wood.ALDER);
-    properties.set("numberStrings", 6);
-    const whatErinLikes = new InstrumentSpec(properties);
+    properties.set("builder", Builder.GIBSON);
+    properties.set("backWood", Wood.MAPLE);
+    const whatBryanLikes = new InstrumentSpec(properties);
 
-    const matchingInstruments: Instrument[] = inventory.search(whatErinLikes);
+    const matchingInstruments: Instrument[] = inventory.search(whatBryanLikes);
     console.log(matchingInstruments);
 
     if (matchingInstruments.length !== 0) {
-      console.log(`Erin, you might like this guitars :`);
+      console.log(`Bryan, you might like this instruments :`);
 
       for (let i = 0; i <= matchingInstruments.length -1; i++) {
         const currentInstrument = matchingInstruments[i];
         const currentInstrumentSpec = currentInstrument.getSpec();
+        console.log(`We have a ${currentInstrumentSpec.getProperty("instrumentType")} with the following properties:`);
 
-        console.log(`We have a ${currentInstrumentSpec.getProperty("builder")} ${currentInstrumentSpec.getProperty("model")} ${currentInstrumentSpec.getProperty("type")} ${currentInstrumentSpec.getProperty("instrumentType")}, 
-        with ${currentInstrumentSpec.getProperty("numberStrings")} strings, made of
-        ${currentInstrumentSpec.getProperty("backWood")} for back and sides, and
-        ${currentInstrumentSpec.getProperty("topWood")} for top.
-        You can have it for only $${currentInstrument.getPrice()}!
-        ----`);
+        const currentInstrumentProperties = currentInstrumentSpec.getProperties().keys();
+        for (const propertyName of currentInstrumentProperties) {
+          if (propertyName !== "instrumentType") {
+            console.log(`    ${propertyName} : ${currentInstrumentSpec.getProperty(propertyName)}`);
+          }
+        }
+        console.log(`You can have this ${currentInstrumentSpec.getProperty("instrumentType")} for only $${currentInstrument.getPrice()}!\n----`);
       }
     } else {
       console.log("Sorry, Erin, we have nothing for you.")
@@ -69,47 +67,31 @@ export class FindGuitarTester {
     properties.set("topWood", Wood.ADIRONDACK);
     inventory.addInstrument("122784", 5495.95, new InstrumentSpec(properties));
 
-    properties.set("model", "OM-28");
-    properties.set("backWood", Wood.BRAZILIAN_ROSEWOOD);
-    inventory.addInstrument("76531", 6295.95, new InstrumentSpec(properties));
-
     properties.set("builder", Builder.GIBSON);
     properties.set("model", "Les Paul");
     properties.set("type", Type.ELECTRIC);
-    properties.set("backWood", Wood.MAHOGANY);
-    properties.set("topWood", Wood.MAHOGANY);
+    properties.set("backWood", Wood.MAPLE);
+    properties.set("topWood", Wood.MAPLE);
     inventory.addInstrument("70108276", 2295.95, new InstrumentSpec(properties));
 
     properties.set("builder", Builder.GIBSON);
     properties.set("model", "SG '61 Reissue");
+    properties.set("backWood", Wood.MAHOGANY);
+    properties.set("topWood", Wood.MAHOGANY);
     inventory.addInstrument("82765501", 1890.95, new InstrumentSpec(properties));
 
-    properties.set("builder", Builder.MARTIN);
-    properties.set("model", "D-28");
+    properties.set("instrumentType", InstrumentType.MANDOLIN);
+    properties.set("model", "F-5G");
     properties.set("type", Type.ACOUSTIC);
-    properties.set("backWood", Wood.BRAZILIAN_ROSEWOOD);
-    properties.set("topWood", Wood.ADIRONDACK);
-    inventory.addInstrument("77023", 6275.95, new InstrumentSpec(properties));
-
-    properties.set("builder", Builder.OLSON);
-    properties.set("model", "SJ");
-    properties.set("backWood", Wood.INDIAN_ROSEWOOD);
-    properties.set("topWood", Wood.CEDAR);
-    properties.set("numberStrings", 12);
-    inventory.addInstrument("1092", 12_995.95, new InstrumentSpec(properties));
-
-    properties.set("builder", Builder.RYAN);
-    properties.set("model", "Cathedral");
-    properties.set("backWood", Wood.COCOBOLO);
-    properties.set("topWood", Wood.CEDAR);
-    inventory.addInstrument("566-62", 8999.95, new InstrumentSpec(properties));
-
-    properties.set("builder", Builder.PRS);
-    properties.set("model", "Dave Navarro Signature");
-    properties.set("type", Type.ELECTRIC);
-    properties.set("backWood", Wood.MAHOGANY);
+    properties.set("backWood", Wood.MAPLE);
     properties.set("topWood", Wood.MAPLE);
-    properties.set("numberStrings", 6);
-    inventory.addInstrument("6 29584", 2100.95, new InstrumentSpec(properties));
+    properties.delete("numberStrings");
+    inventory.addInstrument("9019920", 5495.99, new InstrumentSpec(properties));
+
+    properties.set("instrumentType", InstrumentType.BANJO);
+    properties.set("model", "RB-3 Wreath");
+    properties.delete("topWood");
+    properties.set("numberStrings", 5);
+    inventory.addInstrument("8900231", 2945.95, new InstrumentSpec(properties));
   }
 }
