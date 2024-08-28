@@ -1,8 +1,5 @@
-import { GuitarSpec } from "./GuitarSpec";
-import { Guitar } from "./Guitar";
 import { Instrument } from "./Instrument";
-import { MandolinSpec } from "./MandolinSpec";
-import { Mandolin } from "./Mandolin";
+import { InstrumentSpec } from "./InstrumentSpec";
 
 export class Inventory {
   private inventory: Instrument[];
@@ -11,16 +8,8 @@ export class Inventory {
     this.inventory = [];
   }
 
-  addInstrument(
-    serialNumber: string,
-    price: number,
-    spec: GuitarSpec | MandolinSpec,
-  ): void {
-    if (spec instanceof GuitarSpec) {
-      this.inventory.push(new Guitar(serialNumber, price, spec));
-    } else if (spec instanceof MandolinSpec) {
-      this.inventory.push(new Mandolin(serialNumber, price, spec));
-    }
+  addInstrument(serialNumber: string, price: number, spec: InstrumentSpec ): void {
+    this.inventory.push(new Instrument(serialNumber, price, spec));
   }
 
   getInstrument(serialNumber: string): Instrument | null {
@@ -31,23 +20,13 @@ export class Inventory {
     return null;
   }
 
-  searchGuitar(searchSpec: GuitarSpec): Guitar[] {
-    const matchingGuitars: Guitar[] = [];
+  search(searchSpec: InstrumentSpec): Instrument[] {
+    const matchingInstruments: Instrument[] = [];
     for (let i = 0; i <= this.inventory.length -1; i++) {
-      const currentGuitar: Guitar = this.inventory[i];
-      const currentGuitarSpec = currentGuitar.getSpec() as GuitarSpec;
-      if (currentGuitarSpec.matches(searchSpec)) matchingGuitars.push(currentGuitar);
+      const currentInstrument = this.inventory[i];
+      const currentInstrumentSpec = currentInstrument.getSpec();
+      if (currentInstrumentSpec.matches(searchSpec)) matchingInstruments.push(currentInstrument);
     }
-    return matchingGuitars;
-  }
-
-  searchMandolin(searchSpec: MandolinSpec): Mandolin[] {
-    const matchingMandolins: Mandolin[] = [];
-    for (let i = 0; i <= this.inventory.length -1; i++) {
-      const currentMandolin: Guitar = this.inventory[i];
-      const currentMandolinSpec = currentMandolin.getSpec();
-      if (currentMandolinSpec.matches(searchSpec)) matchingMandolins.push(currentMandolin);
-    }
-    return matchingMandolins;
+    return matchingInstruments;
   }
 }
